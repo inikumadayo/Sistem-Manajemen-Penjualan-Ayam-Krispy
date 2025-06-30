@@ -252,7 +252,7 @@ void Toko::loginUser()
     do
     {
         clearScreen();
-        tampilkanHeader("LOGIN ADMIN");
+        tampilkanHeader("LOGIN PELANGGAN");
         if (hitung > 5)
         {
             cout << " *PERINGATAN!!" << endl;
