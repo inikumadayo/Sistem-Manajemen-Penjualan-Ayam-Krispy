@@ -1377,21 +1377,26 @@ void Toko::carikanJumlahStok()
     cout << endl;
     int stokTemp[100];
     string namaTemp[100];
-    for (int i = 0; i < jumlahMakanan; i++) {
+    for (int i = 0; i < jumlahMakanan; i++)
+    {
         stokTemp[i] = stokMakanan[i];
         namaTemp[i] = daftarMakanan[i];
     }
 
-    for (int i = 0; i < jumlahMakanan - 1; i++) {
+    for (int i = 0; i < jumlahMakanan - 1; i++)
+    {
         int minIdx = i;
-        for (int j = i + 1; j < jumlahMakanan; j++) {
+        for (int j = i + 1; j < jumlahMakanan; j++)
+        {
             if (stokTemp[j] < stokTemp[minIdx])
                 minIdx = j;
         }
-        if (minIdx != i) {
+        if (minIdx != i)
+        {
             int stokMin = stokTemp[minIdx];
             string namaMin = namaTemp[minIdx];
-            for (int k = minIdx; k > i; k--) {
+            for (int k = minIdx; k > i; k--)
+            {
                 stokTemp[k] = stokTemp[k - 1];
                 namaTemp[k] = namaTemp[k - 1];
             }
@@ -1400,42 +1405,53 @@ void Toko::carikanJumlahStok()
         }
     }
     int left = 0, right = jumlahMakanan - 1, idx = -1;
-    while (left <= right) {
+    while (left <= right)
+    {
         int mid = (left + right) / 2;
-        if (stokTemp[mid] < jumlahStok) {
+        if (stokTemp[mid] < jumlahStok)
+        {
             idx = mid;
             left = mid + 1;
-        } else {
+        }
+        else
+        {
             right = mid - 1;
         }
     }
     cout << " Makanan dengan stok kurang dari " << jumlahStok << ":" << endl;
-    if (idx == -1) {
+    if (idx == -1)
+    {
         cout << " Tidak ada makanan dengan stok kurang dari " << jumlahStok << "." << endl;
-    } else {
-        for (int i = 0; i <= idx; i++) {
+    }
+    else
+    {
+        for (int i = 0; i <= idx; i++)
+        {
             cout << " " << i + 1 << ". " << namaTemp[i] << " - Stok: " << stokTemp[i] << endl;
         }
     }
 
-    // --- Untuk Minuman ---
     int stokTempMinum[50];
     string namaTempMinum[50];
-    for (int i = 0; i < jumlahMinuman; i++) {
+    for (int i = 0; i < jumlahMinuman; i++)
+    {
         stokTempMinum[i] = stokMinuman[i];
         namaTempMinum[i] = daftarMinuman[i];
     }
-    // Selection sort ascending tanpa swap
-    for (int i = 0; i < jumlahMinuman - 1; i++) {
+    for (int i = 0; i < jumlahMinuman - 1; i++)
+    {
         int minIdx = i;
-        for (int j = i + 1; j < jumlahMinuman; j++) {
+        for (int j = i + 1; j < jumlahMinuman; j++)
+        {
             if (stokTempMinum[j] < stokTempMinum[minIdx])
                 minIdx = j;
         }
-        if (minIdx != i) {
+        if (minIdx != i)
+        {
             int stokMin = stokTempMinum[minIdx];
             string namaMin = namaTempMinum[minIdx];
-            for (int k = minIdx; k > i; k--) {
+            for (int k = minIdx; k > i; k--)
+            {
                 stokTempMinum[k] = stokTempMinum[k - 1];
                 namaTempMinum[k] = namaTempMinum[k - 1];
             }
@@ -1443,21 +1459,32 @@ void Toko::carikanJumlahStok()
             namaTempMinum[i] = namaMin;
         }
     }
-    left = 0; right = jumlahMinuman - 1; idx = -1;
-    while (left <= right) {
+    left = 0;
+    right = jumlahMinuman - 1;
+    idx = -1;
+    while (left <= right)
+    {
         int mid = (left + right) / 2;
-        if (stokTempMinum[mid] < jumlahStok) {
+        if (stokTempMinum[mid] < jumlahStok)
+        {
             idx = mid;
             left = mid + 1;
-        } else {
+        }
+        else
+        {
             right = mid - 1;
         }
     }
-    cout << endl << " Minuman dengan stok kurang dari " << jumlahStok << ":" << endl;
-    if (idx == -1) {
+    cout << endl
+         << " Minuman dengan stok kurang dari " << jumlahStok << ":" << endl;
+    if (idx == -1)
+    {
         cout << " Tidak ada minuman dengan stok kurang dari " << jumlahStok << "." << endl;
-    } else {
-        for (int i = 0; i <= idx; i++) {
+    }
+    else
+    {
+        for (int i = 0; i <= idx; i++)
+        {
             cout << " " << i + 1 << ". " << namaTempMinum[i] << " - Stok: " << stokTempMinum[i] << endl;
         }
     }
@@ -1474,7 +1501,7 @@ void Toko::kelolaStok()
     cout << " 1. Lihat Stok" << endl;
     cout << " 2. Tambah Stok" << endl;
     cout << " 3. Kurangi Stok" << endl;
-    cout << " 4. Tampilkan stok kurang dari 10" << endl;
+    cout << " 4. Cari Stok" << endl;
     cout << " 5. Kembali" << endl;
     tampilkanFooter();
     cout << " Masukkan Pilihan: ";
@@ -1599,6 +1626,7 @@ void Toko::kurangiStok()
     if (jenis == "1")
     {
         int index, jumlah;
+        liatDaftarMakanan();
         cout << " Masukkan nomor makanan: ";
         cin >> index;
         if (index < 1 || index > jumlahMakanan || jumlah < 1)
@@ -1628,6 +1656,7 @@ void Toko::kurangiStok()
     else if (jenis == "2")
     {
         int index, jumlah;
+        liatDaftarMinuman();
         cout << " Masukkan nomor minuman: ";
         cin >> index;
         if (index < 1 || index > jumlahMinuman || jumlah < 1)
@@ -2673,7 +2702,8 @@ void Toko::kelolaKaryawan()
 
             cout << " *Karyawan berhasil dihapus." << endl;
             pauseScreen();
-        } else if (pilihan == "5")
+        }
+        else if (pilihan == "5")
         {
             clearScreen();
             tampilkanHeader("CARI KARYAWAN");
